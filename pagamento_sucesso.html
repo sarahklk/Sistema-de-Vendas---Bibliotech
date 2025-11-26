@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="checkout-container">
+
+    <h2>Pagamento Realizado</h2>
+
+    <div class="checkout-resumo">
+        <p style="font-size:18px; margin-bottom:20px;">
+            {{ mensagem }}
+        </p>
+
+        <h3>Comprovantes</h3>
+        <ul class="lista-checkout">
+            {% for id in compras %}
+            <li>
+                <div>
+                    <strong>Compra #{{ id }}</strong><br>
+                    <a href="{{ url_for('comprovante', compra_id=id) }}" class="pagar-btn" style="margin-top:8px;">
+                        Ver Comprovante
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('index') }}" class="voltar-btn">Voltar ao Catálogo</a>
+        <a href="{{ url_for('historico') }}" class="pagar-btn" style="background:#0059ff;">Ver </a>
+    </div>
+
+</div>
+
+{% endblock %}

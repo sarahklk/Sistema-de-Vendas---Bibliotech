@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="comprovante-container">
+
+    <h2>Comprovante de Compra</h2>
+
+    <p><strong>CPF:</strong> {{ cpf }}</p>
+    <p><strong>Telefone:</strong> {{ telefone }}</p>
+
+    <p>
+        <strong>Método de Pagamento:</strong>
+        {% if pagamento == "pix" %} PIX {% endif %}
+        {% if pagamento == "cartao_credito" %} Cartão de Crédito {% endif %}
+        {% if pagamento == "cartao_debito" %} Cartão de Débito {% endif %}
+    </p>
+
+    <h3>Livros Comprados:</h3>
+
+    <ul class="lista-comprovante">
+        {% for livro in livros %}
+        <li>
+            <strong>{{ livro.titulo }}</strong> — R$ {{ "%.2f"|format(livro.preco) }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total Pago: R$ {{ "%.2f"|format(total|float) }}</h3>
+
+    <br>
+
+    <a href="{{ url_for('index') }}" class="voltar-btn">Voltar ao Início</a>
+
+</div>
+
+{% endblock %}

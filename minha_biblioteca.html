@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="biblioteca-container">
+    <h2>Minha Biblioteca</h2>
+
+    {% if session.get('user_name') %}
+        <p class="bem-vindo">
+            Bem-vindo(a), <strong>{{ session['user_name'] }}</strong>!
+        </p>
+    {% endif %}
+
+    {% if livros %}
+    <div class="livros-grid">
+
+        {% for livro in livros %}
+        <div class="livro-item">
+
+            <img 
+                src="{{ url_for('static', filename='img/' ~ livro.capa) }}"
+                alt="{{ livro.titulo }}"
+            >
+
+            <h3>{{ livro.titulo }}</h3>
+            <p>{{ livro.autor }}</p>
+
+            <div class="acoes-biblioteca">
+              
+                <a href="{{ url_for('previa', livro_id=livro.id) }}" class="ler-btn">
+                    Ler Prévia
+                </a>
+
+                <a href="{{ url_for('ler', livro_id=livro.id) }}" class="comprar-btn">
+                    Ler Completo
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <p class="nenhum-livro">
+        Você ainda não comprou nenhum livro.
+    </p>
+
+    <a href="{{ url_for('index') }}" class="voltar-btn">
+        Ver Catálogo
+    </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

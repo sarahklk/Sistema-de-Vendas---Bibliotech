@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="leitura-container">
+    <h2>{{ livro.titulo }}</h2>
+    <p><strong>Autor:</strong> {{ livro.autor }}</p>
+
+    <hr>
+
+    <div class="conteudo-livro">
+        <p style="margin-top: 1rem; color: #475569;">
+            Aqui seria o conteúdo do livro digital ou o trecho de pré-visualização.
+            Você pode futuramente carregar um PDF, EPUB ou texto salvo no banco de dados.
+        </p>
+    </div>
+
+    <a href="{{ url_for('minha_biblioteca') }}" class="voltar-btn">
+        ⬅ Voltar à Biblioteca
+    </a>
+</div>
+
+{% endblock %}

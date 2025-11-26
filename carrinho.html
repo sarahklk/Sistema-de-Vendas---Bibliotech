@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="cart-title">Meu Carrinho</h2>
+
+<div class="cart-container">
+
+  {% if livros %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Capa</th>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Preço</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for livro in livros %}
+        <tr>
+          <td>
+            <img src="{{ url_for('static', filename='img/' + (livro.capa or 'default.jpg')) }}" class="cart-cover" alt="{{ livro.titulo }}">
+          </td>
+          <td>{{ livro.titulo }}</td>
+          <td>{{ livro.autor }}</td>
+          <td>R$ {{ '%.2f'|format(livro.preco or 0) }}</td>
+          <td>
+            <a href="{{ url_for('remover_carrinho', livro_id=livro.id) }}" class="btn-remove">Remover</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div style="text-align:right; margin-top:16px;">
+      <strong>Total: R$ {{ '%.2f'|format(total or 0) }}</strong>
+    </div>
+
+    <div style="text-align:right; margin-top:12px;">
+      <a href="{{ url_for('checkout') }}" class="finalizar-btn">Finalizar Compra</a>
+    </div>
+
+  {% else %}
+    <p style="text-align:center; padding:30px;">Seu carrinho está vazio.</p>
+    <div style="text-align:center; margin-top:12px;">
+      <a href="{{ url_for('index') }}" class="btn">Voltar ao catálogo</a>
+    </div>
+  {% endif %}
+
+</div>
+
+{% endblock %}

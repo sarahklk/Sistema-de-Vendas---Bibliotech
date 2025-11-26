@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="aviso-container">
+
+    <h2>{{ livro.titulo }}</h2>
+    <p><strong>Autor:</strong> {{ livro.autor }}</p>
+
+    <hr>
+
+    <div class="aviso-box">
+        <h3>Conteúdo Completo Indisponível</h3>
+
+        <p>
+            Este livro só está disponível para leitura completa após a compra.
+        </p>
+
+        <p>
+            Assim que você finalizar o pagamento, o eBook completo será enviado automaticamente
+            para o e-mail da sua conta:
+            <strong>{{ session.get('user_email', 'seu e-mail') }}</strong>.
+        </p>
+
+        <p class="info-previa">
+            Você ainda pode ler gratuitamente a prévia clicando no botão abaixo:
+        </p>
+
+        <a href="{{ url_for('previa', livro_id=livro.id) }}" class="trecho-btn">
+            Ler Prévia
+        </a>
+    </div>
+
+    <a href="{{ url_for('checkout') }}" class="comprar-btn">
+        Comprar e Receber por E-mail
+    </a>
+
+    <a href="{{ url_for('index') }}" class="voltar-btn">
+        ⬅ Voltar ao Catálogo
+    </a>
+
+</div>
+
+{% endblock %}

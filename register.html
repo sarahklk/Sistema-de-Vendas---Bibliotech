@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-container">
+    <h2>Criar Conta na Bibliotech</h2>
+
+    <form method="POST">
+
+        <label for="nome">Nome Completo</label>
+        <input 
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Digite seu nome"
+            required
+        >
+
+        <label for="email">E-mail</label>
+        <input 
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+            required
+        >
+
+        <label for="senha">Senha</label>
+        <input 
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Crie uma senha"
+            required
+        >
+
+        <button type="submit" class="register-btn-form">
+            Registrar
+        </button>
+    </form>
+
+    <p class="form-footer">
+        Já tem uma conta?
+        <a href="{{ url_for('login') }}">Faça login</a>.
+    </p>
+</div>
+
+{% endblock %}

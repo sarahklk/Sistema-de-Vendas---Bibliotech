@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="form-container">
+    <h2>Entrar na Bibliotech</h2>
+
+    <form method="POST">
+
+        <label for="email">E-mail</label>
+        <input 
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+            required
+        >
+
+        <label for="senha">Senha</label>
+        <input 
+            type="password"
+            name="senha"
+            id="senha"
+            placeholder="Digite sua senha"
+            required
+        >
+
+        <button type="submit" class="login-btn-form">
+            Entrar
+        </button>
+    </form>
+
+    <p class="form-footer">
+        Ainda não tem uma conta?
+        <a href="{{ url_for('register') }}">Cadastre-se aqui</a>.
+    </p>
+</div>
+
+{% endblock %}

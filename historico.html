@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="titulo-historico">Seu Histórico de Compras</h2>
+
+<div class="historico-container">
+
+    {% if compras %}
+        {% for c in compras %}
+        <div class="historico-item">
+            <h3>{{ c.titulo }}</h3>
+            <p>Preço: R$ {{ "%.2f"|format(c.preco) }}</p>
+            <span class="data">
+                Comprado em: {{ c.data_compra.strftime('%d/%m/%Y %H:%M') }}
+            </span>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="sem-compras">Você ainda não comprou nenhum livro.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

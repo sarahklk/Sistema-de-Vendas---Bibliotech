@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="checkout-container">
+
+    <h2>Finalizar Compra</h2>
+
+    {% if livros %}
+
+    <div class="checkout-resumo">
+
+        <h3>Resumo da Compra</h3>
+
+        <ul class="lista-checkout">
+            {% for livro in livros %}
+            <li>
+               <img src="{{ url_for('static', filename='img/' ~ livro.capa) }}">
+                <div>
+                    <strong>{{ livro.titulo }}</strong><br>
+                    <span>{{ livro.autor }}</span><br>
+                    <span>R$ {{ "%.2f"|format(livro.preco) }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h3 class="total-checkout">Total: R$ {{ "%.2f"|format(total) }}</h3>
+
+        <!-- FORMULÁRIO CORRETO -->
+        <form method="POST" action="{{ url_for('finalizar_compra') }}" class="form-pagamento">
+
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" id="cpf" required placeholder="000.000.000-00">
+
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" id="telefone" required placeholder="(00) 00000-0000">
+
+            <label for="pagamento">Método de Pagamento</label>
+            <select name="pagamento" id="pagamento" required>
+                <option value="">Selecione</option>
+                <option value="cartao_credito">Cartão de Crédito</option>
+                <option value="cartao_debito">Cartão de Débito</option>
+                <option value="pix">PIX</option>
+            </select>
+
+            <button type="submit" class="pagar-btn">
+                Confirmar Pagamento
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+        <p class="carrinho-vazio">Não há itens para comprar.</p>
+        <a href="{{ url_for('index') }}" class="voltar-btn">Voltar ao Catálogo</a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

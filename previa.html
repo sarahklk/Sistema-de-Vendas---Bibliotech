@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="leitura-container">
+    <h2>Prévia de: {{ livro.titulo }}</h2>
+    <p><strong>Autor:</strong> {{ livro.autor }}</p>
+
+    <hr>
+
+    <div class="conteudo-livro">
+        <p style="margin-top: 1rem; color: #475569;">
+            {{ livro.previa or "Prévia ainda não cadastrada. Peça ao administrador para adicionar." }}
+        </p>
+    </div>
+
+    <div class="acoes-previa">
+        <a href="{{ url_for('ler', livro_id=livro.id) }}" class="comprar-btn">
+            Ler Completo (somente após compra)
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="pesquisa-container">
+
+    <h2>Resultados da Pesquisa</h2>
+
+    {% if query %}
+        <p class="resultado-texto">
+            Você pesquisou por: <strong>{{ query }}</strong>
+        </p>
+    {% endif %}
+
+    {% if livros %}
+    <div class="catalogo-grid">
+        {% for livro in livros %}
+        <div class="livro-card">
+
+            <img src="{{ url_for('static', filename='img/' ~ livro.capa) }}" alt="{{ livro.titulo }}">
+
+            <h4>{{ livro.titulo }}</h4>
+            <p>{{ livro.autor }}</p>
+
+            <div class="botoes-livro">
+
+                <a href="{{ url_for('previa', livro_id=livro.id) }}" class="trecho-btn">
+                    Ler Prévia
+                </a>
+
+                <a href="{{ url_for('ler', livro_id=livro.id) }}" class="comprar-btn">
+                    Ler Completo
+                </a>
+
+                <form action="{{ url_for('adicionar_carrinho', livro_id=livro.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="carrinho-btn">Adicionar ao Carrinho</button>
+                </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+        <p class="nenhum-resultado">
+            Nenhum livro encontrado para sua busca.
+        </p>
+
+        <a href="{{ url_for('index') }}" class="voltar-btn">
+            Voltar ao Catálogo
+        </a>
+    {% endif %}
+
+</div>
+
+{% endblock %}

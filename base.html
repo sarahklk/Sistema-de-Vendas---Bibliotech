@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "Bibliotech" }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="topo">
+        <nav class="navbar">
+
+            <a href="{{ url_for('index') }}" class="logo">Bibliotech</a>
+
+        
+            <form action="{{ url_for('pesquisar') }}" method="GET" class="barra-pesquisa">
+                <input type="text" name="q" placeholder="Buscar título ou autor..." required>
+            </form>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('index') }}">Início</a>
+                <a href="{{ url_for('carrinho') }}">Carrinho</a>
+
+                {% if session.get('logged_in') %}
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Sair</a>
+
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+                    <a href="{{ url_for('register') }}" class="register-btn">Registrar</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Bibliotech</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="banner">
+    <div class="banner-item active">
+        <img src="{{ url_for('static', filename='img/banner1.jpg') }}" alt="Banner 1">
+        <div class="banner-text">
+            <h2>Explore o universo dos livros digitais</h2>
+            <p>Conhecimento, emoção e inspiração — tudo a um clique de distância.</p>
+            <a href="#catalogo" class="banner-btn">Ver Catálogo</a>
+        </div>
+    </div>
+
+    <div class="banner-item">
+        <img src="{{ url_for('static', filename='img/banner2.jpg') }}" alt="Banner 2">
+        <div class="banner-text">
+            <h2>Autores incríveis, histórias únicas</h2>
+            <p>Descubra novas perspectivas com os melhores autores da Bibliotech.</p>
+            <a href="{{ url_for('register') }}" class="banner-btn">Crie sua conta</a>
+        </div>
+    </div>
+
+    <div class="banner-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+    </div>
+</div>
+
+<section id="catalogo" class="catalogo">
+    <h2>Todos os livros da Bibliotech</h2>
+    <p>Bem-vindo(a) à nossa comunidade de leitores. Aqui você encontra sua próxima leitura.</p>
+
+    <h3 class="subtitulo">Novidades • Ficção e Não Ficção</h3>
+
+    <div class="catalogo-grid">
+        {% for livro in livros %}
+        <div class="livro-card">
+
+            <img src="{{ url_for('static', filename='img/' ~ livro.capa) }}" alt="{{ livro.titulo }}">
+
+            <h4>{{ livro.titulo }}</h4>
+            <p>{{ livro.autor }}</p>
+
+            <div class="botoes-livro">
+
+            
+                <a href="{{ url_for('previa', livro_id=livro.id) }}" class="trecho-btn">
+                    Ler Prévia
+                </a>
+            
+                <a href="{{ url_for('ler', livro_id=livro.id) }}" class="comprar-btn">
+                    Ler Completo
+                </a>
+
+                <form action="{{ url_for('adicionar_carrinho', livro_id=livro.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="carrinho-btn">Adicionar ao Carrinho</button>
+                </form>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".banner-item");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+        dots[i].classList.toggle("active", i === index);
+    });
+}
+
+dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+    });
+});
+
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 5000);
+</script>
+
+{% endblock %}
