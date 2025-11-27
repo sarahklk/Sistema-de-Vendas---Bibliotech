@@ -1,0 +1,143 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f0f4ff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #1a3fcc;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #1a3fcc;
+    margin-top: 30px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.tab {
+    padding: 12px 22px;
+    background: #d9e2ff;
+    color: #1a3fcc;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.tab:hover {
+    background: #c5d4ff;
+}
+
+.tab.active {
+    background: #1a3fcc;
+    color: white;
+}
+
+.section {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.section.active {
+    display: block;
+}
+
+form {
+    margin-bottom: 40px;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #bfc8e6;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #1a3fcc;
+}
+
+form button {
+    background: #1a3fcc;
+    padding: 12px 20px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+form button:hover {
+    background: #152ea3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background: #1a3fcc;
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+}
+
+td {
+    background: #eef2ff;
+    padding: 12px;
+}
+
+tr:nth-child(even) td {
+    background: #e1e8ff;
+}
+
+img {
+    width: 55px;
+    border-radius: 8px;
+    border: 2px solid #1a3fcc;
+}
+
+.btn {
+    padding: 8px 14px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    color: white;
+}
+.btn:hover {
+    opacity: 0.8;
+}
+.btn.red {
+    background: #d9534f;
+}
+.btn.yellow {
+    background: #f0ad4e;
+}
+.btn.blue {
+    background: #1a3fcc;
+}
